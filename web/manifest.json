@@ -1,6 +1,6 @@
 {
-    "name": "quiz_app_please_work",
-    "short_name": "quiz_app_please_work",
+    "name": "final_project_app",
+    "short_name": "final_project_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

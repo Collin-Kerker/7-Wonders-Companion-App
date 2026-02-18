@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "410537701623",
+    "firebase_url": "https://csc322-fa25-7wonders-default-rtdb.firebaseio.com",
+    "project_id": "csc322-fa25-7wonders",
+    "storage_bucket": "csc322-fa25-7wonders.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410537701623:android:123e460c441f92c099a3f2",
+        "android_client_info": {
+          "package_name": "com.example.final_project_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0sSBFFe3tPxR1gC3JkE9HuSXgDH94FWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410537701623:android:81c649197dedc43a99a3f2",
+        "android_client_info": {
+          "package_name": "com.example.final_project_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0sSBFFe3tPxR1gC3JkE9HuSXgDH94FWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
