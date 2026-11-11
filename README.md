@@ -1,4 +1,4 @@
-# 7 Wonders Score Tracker
+# 7 Wonders Companion App
 
 A Flutter mobile application for tracking scores in the board game **7 Wonders**. Built with Firebase for authentication, cloud storage, and real-time data syncing.
 
@@ -13,6 +13,8 @@ This app allows users to log games of 7 Wonders, manage players, and track detai
 - **Game Logging** — Create and edit games with per-player score breakdowns
 - **7 Wonders Scoring** — Track all scoring categories: Military, Treasury, Wonders, Civilian, Commerce, Guilds, and Science (with compass/gear/tablet breakdown)
 - **Wonder Selection** — Assign a wonder (Alexandria, Gizah, Babylon, etc.) to each player per game
+- **AI Player Titles** — Gemini looks at a player's average scores by category and gives them a title (e.g. "The Scholarly Warlord")
+- **Player Stats & Charts** — Score-over-time charts and per-wonder breakdowns for each player
 - **Real-Time Sync** — Firestore streams keep game and player lists up to date in real time
 - **Profile Management** — Edit profile info and upload a profile picture (stored in Firebase Cloud Storage)
 - **Light & Dark Themes** — Full theme support with custom color schemes
@@ -50,8 +52,7 @@ lib/
 │
 ├── firestore_repositories/
 │   ├── game_repository.dart           # Firestore CRUD for games
-│   ├── player_repository.dart         # Firestore CRUD for players
-│   └── db_user_profile.dart           # Firestore/Cloud Storage operations for user profiles
+│   └── player_repository.dart         # Firestore CRUD for players
 │
 ├── screens/
 │   ├── auth/
@@ -71,10 +72,11 @@ lib/
 │       └── screen_profile_edit.dart   # Edit user profile
 │
 ├── widgets/
+│   ├── auth/
+│   │   └── widget_password_strength_indicator.dart  # Password strength meter
 │   ├── general/
 │   │   ├── widget_annotated_loading.dart      # Loading animation with timeout
 │   │   ├── widget_edit_player_score.dart       # Score entry widget per player
-│   │   ├── widget_password_strength_indicator.dart  # Password strength meter
 │   │   ├── widget_profile_avatar.dart          # Profile image / initials avatar
 │   │   └── widget_scrollable_background.dart   # Scrollable container widget
 │   └── navigation/
@@ -94,13 +96,14 @@ lib/
 │   │   └── popup_dialogue.dart        # Alert dialog utility
 │   ├── file/
 │   │   └── util_file.dart             # File utility helpers
-│   ├── time/
+│   ├── date_time/
 │   │   └── util_time.dart             # Date/time utility helpers
 │   └── secure_storage/
 │       ├── secure_storage.dart        # Secure storage wrapper
 │       └── secure_storage_keys.dart   # Storage key constants
 │
 └── db_helpers/
+    ├── db_user_profile.dart           # Firestore/Cloud Storage operations for user profiles
     └── firestore_keys.dart            # Firestore collection name constants
 ```
 
@@ -132,10 +135,11 @@ Each player's score in a game is broken down into seven categories:
 1. Clone the repository
 2. Run `flutter pub get` to install dependencies
 3. Configure Firebase using FlutterFire CLI or replace `firebase_options.dart` with your own project credentials
-4. Run the app:
+4. Run the app. The AI player-title feature needs a [Gemini API key](https://aistudio.google.com/apikey), passed in at build time so it never lands in source control:
    ```bash
-   flutter run
+   flutter run --dart-define=GEMINI_API_KEY=your_key_here
    ```
+   Without a key, everything works except title generation.
 
 ## Dependencies
 
