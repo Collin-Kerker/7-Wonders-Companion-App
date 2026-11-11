@@ -10,6 +10,9 @@ import 'package:final_project_app/models/player.dart';
 import 'package:final_project_app/models/game.dart';
 import 'package:final_project_app/providers/provider_games.dart';
 
+// Supplied at build time: flutter run --dart-define=GEMINI_API_KEY=your_key
+const _geminiApiKey = String.fromEnvironment('GEMINI_API_KEY');
+
 /// Represents a data point for the over-time chart
 class ChartDataPoint {
   final DateTime datePlayed;
@@ -269,6 +272,12 @@ $averageText
   }
 
   Future<void> _generateAndSaveTitle(Player player) async {
+    if (_geminiApiKey.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('AI titles need a GEMINI_API_KEY (see README).')),
+      );
+      return;
+    }
     setState(() => _generatingTitle = true);
     try {
       final newTitle = await _makeTitle(player.id);
@@ -296,7 +305,7 @@ $averageText
 
   @override
   Widget build(BuildContext context) {
-    Gemini.init(apiKey: 'AIzaSyCQekCQ8gaTcM4crHwJl666GtOVnk7JXkA');
+    if (_geminiApiKey.isNotEmpty) Gemini.init(apiKey: _geminiApiKey);
     final player = widget.playerData['player'] as Player;
     final playerScores =
         widget.playerData['playerScores'] as List<PlayerScore>? ?? [];
